@@ -14,12 +14,20 @@ export default function Home() {
   // imagine fetchWeapons applies your filters and query
   const fetchWeapons = (q: string) => {
     // dummy data for example
-    setWeapons([
+    const all: Weapon[] = [
       { id: "1", name: "Longsword", type: "melee", damage: 75, description: "A sturdy blade.", imageUrl: "/sword.jpg" },
       { id: "2", name: "Crossbow", type: "ranged", damage: 50, description: "Silent and accurate.", imageUrl: "/crossbow.jpg" },
       // …
-    ]);
-  }
+    ];
+  
+    // simple name‐contains filter
+    const filtered = all.filter(w =>
+      w.name.toLowerCase().includes(q.toLowerCase())
+    );
+  
+    setWeapons(filtered);
+  };
+  
   
   return (
     <div className="max-w-6xl mx-auto mt-10 px-4">
@@ -30,8 +38,8 @@ export default function Home() {
             value={query}
             onChange={setQuery}
             onSubmit={(q) => {
-              // later: call NLP parser or fetch results
-              console.log("Searching for:", q);
+              setQuery(q);
+              fetchWeapons(q);
             }}
             placeholder="Describe your ideal weapon"
           />

@@ -24,7 +24,7 @@ export function WeaponsList({
             <WeaponBox
               key={w.id}
               weapon={w}
-              onSelect={onSelectWeapon}
+              onSelect={onSelectWeapon} 
             />
           ))
         )}

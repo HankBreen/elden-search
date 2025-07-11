@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { FilterField, FilterOption } from "@/components/ui/blocks/FilterField";
 import { Form } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
+
 
 // 1) Define your schema
 const FiltersSchema = z.object({
@@ -18,14 +18,37 @@ type FiltersData = z.infer<typeof FiltersSchema>;
 
 // 2) Your options for each field
 const weaponTypeOptions: FilterOption[] = [
-  { id: "sword", label: "Sword" },
   { id: "axe", label: "Axe" },
-  { id: "hammer", label: "Hammer" },
-  { id: "spear", label: "Spear" },
-  { id: "staff", label: "Sword" },
-  { id: "colossal", label: "Colossal" },
+  { id: "ballista", label: "Ballista" },
+  { id: "bow", label: "Bow" },
+  { id: "claw", label: "Claw" },
+  { id: "colossal-sword", label: "Colossal Sword" },
+  { id: "colossal-weapon", label: "Colossal Weapon" },
+  { id: "crossbow", label: "Crossbow" },
+  { id: "curved-greatsword", label: "Curved Greatsword" },
+  { id: "curved-sword", label: "Curved Sword" },
   { id: "dagger", label: "Dagger" },
+  { id: "fist", label: "Fist" },
+  { id: "flail", label: "Flail" },
+  { id: "glintstone-staff", label: "Glintstone Staff" },
+  { id: "great-spear", label: "Great Spear" },
+  { id: "greataxe", label: "Greataxe" },
+  { id: "greatbow", label: "Greatbow" },
+  { id: "greatsword", label: "Greatsword" },
+  { id: "halberd", label: "Halberd" },
+  { id: "hammer", label: "Hammer" },
+  { id: "heavy-thrusting-sword", label: "Heavy Thrusting Sword" },
+  { id: "katana", label: "Katana" },
+  { id: "light-bow", label: "Light Bow" },
+  { id: "reaper", label: "Reaper" },
+  { id: "sacred-seal", label: "Sacred Seal" },
+  { id: "spear", label: "Spear" },
+  { id: "straight-sword", label: "Straight Sword" },
+  { id: "thrusting-sword", label: "Thrusting Sword" },
+  { id: "torch", label: "Torch" },
   { id: "twinblade", label: "Twinblade" },
+  { id: "warhammer", label: "Warhammer" },
+  { id: "whip", label: "Whip" },
 ];
 const stageOptions: FilterOption[] = [
   { id: "early", label: "Early Game" },
