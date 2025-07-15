@@ -50,6 +50,7 @@ const weaponTypeOptions: FilterOption[] = [
   { id: "warhammer", label: "Warhammer" },
   { id: "whip", label: "Whip" },
 ];
+
 const stageOptions: FilterOption[] = [
   { id: "early", label: "Early Game" },
   { id: "mid", label: "Middle Game" },

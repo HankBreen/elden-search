@@ -1,13 +1,17 @@
 // app/page.tsx
-"use client";
-
+"use client"
 import { useState } from "react";
 import Filters from "@/components/ui/blocks/Filters";
 import { SearchBar } from "@/components/ui/blocks/SearchBar";
 import { WeaponsList } from "@/components/ui/blocks/WeaponList";
 import { Weapon } from "@/components/ui/blocks/WeaponBox";
+//import { cookies } from 'next/headers'
+import { createClient } from '@/app/utils/supabase/server'
 
-export default function Home() {
+export default async function Home() {
+
+  const supabase = await createClient();
+
   const [query, setQuery] = useState("");
   const [weapons, setWeapons] = useState<Weapon[]>([]);
 
