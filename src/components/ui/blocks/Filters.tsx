@@ -1,98 +1,76 @@
-"use client";
+// File: components/ui/blocks/Filters.tsx
+'use client'
 
-import React from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import React from 'react'
+import { Checkbox } from '@/components/ui/checkbox'
 
-import { FilterField, FilterOption } from "@/components/ui/blocks/FilterField";
-import { Form } from "@/components/ui/form";
+export interface FilterOption {
+  id: string
+  label: string
+}
 
-
-// 1) Define your schema
-const FiltersSchema = z.object({
-  sidebar: z.array(z.string()),
-  experience: z.array(z.string()), // optional
-});
-type FiltersData = z.infer<typeof FiltersSchema>;
-
-// 2) Your options for each field
 const weaponTypeOptions: FilterOption[] = [
-  { id: "axe", label: "Axe" },
-  { id: "ballista", label: "Ballista" },
-  { id: "bow", label: "Bow" },
-  { id: "claw", label: "Claw" },
-  { id: "colossal-sword", label: "Colossal Sword" },
-  { id: "colossal-weapon", label: "Colossal Weapon" },
-  { id: "crossbow", label: "Crossbow" },
-  { id: "curved-greatsword", label: "Curved Greatsword" },
-  { id: "curved-sword", label: "Curved Sword" },
-  { id: "dagger", label: "Dagger" },
-  { id: "fist", label: "Fist" },
-  { id: "flail", label: "Flail" },
-  { id: "glintstone-staff", label: "Glintstone Staff" },
-  { id: "great-spear", label: "Great Spear" },
-  { id: "greataxe", label: "Greataxe" },
-  { id: "greatbow", label: "Greatbow" },
-  { id: "greatsword", label: "Greatsword" },
-  { id: "halberd", label: "Halberd" },
-  { id: "hammer", label: "Hammer" },
-  { id: "heavy-thrusting-sword", label: "Heavy Thrusting Sword" },
-  { id: "katana", label: "Katana" },
-  { id: "light-bow", label: "Light Bow" },
-  { id: "reaper", label: "Reaper" },
-  { id: "sacred-seal", label: "Sacred Seal" },
-  { id: "spear", label: "Spear" },
-  { id: "straight-sword", label: "Straight Sword" },
-  { id: "thrusting-sword", label: "Thrusting Sword" },
-  { id: "torch", label: "Torch" },
-  { id: "twinblade", label: "Twinblade" },
-  { id: "warhammer", label: "Warhammer" },
-  { id: "whip", label: "Whip" },
+  { id: 'Axe', label: 'Axe' },
+  { id: 'Ballista', label: 'Ballista' },
+  { id: 'Bow', label: 'Bow' },
+  { id: 'Claw', label: 'Claw' },
+  { id: 'Colossal Sword', label: 'Colossal Sword' },
+  { id: 'Colossal Weapon', label: 'Colossal Weapon' },
+  { id: 'Crossbow', label: 'Crossbow' },
+  { id: 'Curved Greatsword', label: 'Curved Greatsword' },
+  { id: 'Curved Sword', label: 'Curved Sword' },
+  { id: 'Dagger', label: 'Dagger' },
+  { id: 'Fist', label: 'Fist' },
+  { id: 'Flail', label: 'Flail' },
+  { id: 'Glintstone Staff', label: 'Glintstone Staff' },
+  { id: 'Great Spear', label: 'Great Spear' },
+  { id: 'Greataxe', label: 'Greataxe' },
+  { id: 'Greatbow', label: 'Greatbow' },
+  { id: 'Greatsword', label: 'Greatsword' },
+  { id: 'Halberd', label: 'Halberd' },
+  { id: 'Hammer', label: 'Hammer' },
+  { id: 'Heavy Thrusting Sword', label: 'Heavy Thrusting Sword' },
+  { id: 'Katana', label: 'Katana' },
+  { id: 'Light Bow', label: 'Light Bow' },
+  { id: 'Reaper', label: 'Reaper' },
+  { id: 'Sacred Seal', label: 'Sacred Seal' },
+  { id: 'Spear', label: 'Spear' },
+  { id: 'Straight Sword', label: 'Straight Sword' },
+  { id: 'Thrusting Sword', label: 'Thrusting Sword' },
+  { id: 'Torch', label: 'Torch' },
+  { id: 'Twinblade', label: 'Twinblade' },
+  { id: 'Warhammer', label: 'Warhammer' },
+  { id: 'Whip', label: 'Whip' },
 ];
 
-const stageOptions: FilterOption[] = [
-  { id: "early", label: "Early Game" },
-  { id: "mid", label: "Middle Game" },
-  { id: "late", label: "Late Game" },
-  { id:"dlc", label: "DLC"},
-];
+interface FiltersProps {
+  selectedTypes: string[]
+  onTypesChange: (next: string[]) => void
+}
 
-export default function Filters() {
-  const form = useForm<FiltersData>({
-    resolver: zodResolver(FiltersSchema),
-    defaultValues: {
-      sidebar: ["recents", "home"],
-      experience: [],
-    },
-  });
-
-  const onSubmit = (data: FiltersData) => {
-    console.log("filters:", data);
-    // trigger your search here…
-  };
-
+export default function Filters({
+  selectedTypes,
+  onTypesChange,
+}: FiltersProps) {
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 p-4 bg-white rounded-lg shadow"
-      >
-        <FilterField
-          control={form.control}
-          name="sidebar"
-          options={weaponTypeOptions}
-          label="Weapon Type"
-        />
-
-        <FilterField
-          control={form.control}
-          name="experience"
-          options={stageOptions}
-          label="Where The Weapon Is Found"
-        />
-
-      </form>
-    </Form>
-  );
+    <div className="space-y-6 p-4 bg-white rounded-lg shadow">
+      <section>
+        <h3 className="mb-2 font-medium">Weapon Type</h3>
+        {weaponTypeOptions.map(opt => (
+          <div key={opt.label} className="flex items-center space-x-2 mb-1">
+            <Checkbox
+              checked={selectedTypes.includes(opt.label)}
+              onCheckedChange={checked => {
+                const next = checked
+                  ? [...selectedTypes, opt.label]
+                  : selectedTypes.filter(label => label !== opt.label)
+                onTypesChange(next)
+              }}
+            />
+            <label className="text-sm">{opt.label}</label>
+          </div>
+        ))}
+      </section>
+    </div>
+  )
 }

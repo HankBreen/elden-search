@@ -1,21 +1,30 @@
-// components/WeaponBox.tsx
-"use client";
-
-import React from "react";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
+// File: components/ui/blocks/WeaponBox.tsx
+'use client'
+import React from 'react'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from '@/components/ui/card'
 
 export interface Weapon {
-  id: string;
-  name: string;
-  type: string;
-  damage: number;
-  description?: string;
-  imageUrl?: string;
+  id: string
+  name: string
+  image: string
+  description: string
+  attack: string
+  defence: string
+  scalesWith: string
+  requiredAttributes: string
+  category: string
 }
 
 interface WeaponBoxProps {
-  weapon: Weapon;
-  onSelect?: (weaponId: string) => void;
+  weapon: Weapon
+  onSelect?: (weaponId: string) => void
 }
 
 export function WeaponBox({ weapon, onSelect }: WeaponBoxProps) {
@@ -24,9 +33,9 @@ export function WeaponBox({ weapon, onSelect }: WeaponBoxProps) {
       onClick={() => onSelect?.(weapon.id)}
       className="flex w-full max-w-md cursor-pointer hover:shadow-lg transition-shadow"
     >
-      {weapon.imageUrl && (
+      {weapon.image && (
         <img
-          src={weapon.imageUrl}
+          src={weapon.image}
           alt={weapon.name}
           className="w-32 h-32 object-cover rounded-l-lg"
         />
@@ -35,7 +44,7 @@ export function WeaponBox({ weapon, onSelect }: WeaponBoxProps) {
       <div className="flex flex-col flex-1">
         <CardHeader className="px-4 pt-4 pb-0">
           <CardTitle>{weapon.name}</CardTitle>
-          <CardDescription className="capitalize">{weapon.type}</CardDescription>
+          <CardDescription className="capitalize">{weapon.category}</CardDescription>
         </CardHeader>
 
         {weapon.description && (
@@ -47,10 +56,9 @@ export function WeaponBox({ weapon, onSelect }: WeaponBoxProps) {
         )}
 
         <CardFooter className="px-4 py-2">
-          <span className="text-sm font-medium">Damage: {weapon.damage}</span>
+          <span className="text-sm font-medium">Damage: {weapon.attack}</span>
         </CardFooter>
       </div>
     </Card>
-  );
+  )
 }
-
