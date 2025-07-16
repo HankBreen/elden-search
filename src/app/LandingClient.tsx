@@ -14,7 +14,6 @@ export default function LandingClient({
   initialWeapons: Weapon[]
 }) {
 
-  console.log('initialWeapons count:', initialWeapons.length, initialWeapons)
   const [searchQuery, setSearchQuery] = useState('')
   const [typeFilter, setTypeFilter]   = useState<string[]>([])
 

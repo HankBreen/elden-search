@@ -11,7 +11,7 @@ interface WeaponsListProps {
 
 export function WeaponsList({ weapons, onSelectWeapon }: WeaponsListProps) {
   return (
-    <ScrollArea className="h-[70vh] w-full rounded-md border">
+    <ScrollArea className="h-[110vh] w-full rounded-md border">
       <div className="p-4 space-y-4">
         {weapons.length === 0 ? (
           <p className="text-gray-500">No weapons found.</p>

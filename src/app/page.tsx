@@ -11,9 +11,9 @@ export default async function Page() {
     .from<'weapons',Weapon>('weapons')
     .select('*')
 
-  console.log('[Page] Supabase fetch:', { data, error })
-
   const weapons: Weapon[] = data ?? []
 
-  return <LandingClient initialWeapons={weapons} />
+  return (
+    <LandingClient initialWeapons={weapons} />
+  )
 }
