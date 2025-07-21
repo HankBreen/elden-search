@@ -1,5 +1,3 @@
-// File: app/LandingClient.tsx
-// Client Component: UI and interactivity live here
 'use client'
 
 import { useState, useMemo } from 'react'
@@ -8,32 +6,47 @@ import { SearchBar } from '@/components/ui/blocks/SearchBar'
 import { WeaponsList } from '@/components/ui/blocks/WeaponList'
 import type { Weapon } from '@/components/ui/blocks/WeaponBox'
 
-export default function LandingClient({
-  initialWeapons,
-}: {
+interface LandingClientProps {
   initialWeapons: Weapon[]
-}) {
+}
 
-  const [searchQuery, setSearchQuery] = useState('')
-  const [typeFilter, setTypeFilter]   = useState<string[]>([])
+export default function LandingClient({ initialWeapons }: LandingClientProps) {
+  const [query, setQuery] = useState<string>('')
+  const [typeFilter, setTypeFilter] = useState<string[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
+  const [weapons, setWeapons] = useState<Weapon[]>(initialWeapons)
 
-  const filtered = useMemo(() => {
-    return initialWeapons
-    .filter(w =>
-        typeFilter.length === 0
-          ? true
-          : typeFilter.includes(w.category)
-      )
-  }, [initialWeapons, typeFilter, searchQuery])
+  async function handleSearch(q: string) {
+    setLoading(true)
+    try {
+      const res = await fetch('/api/search', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: q }),
+      })
+      const { weapons: newWeapons } = await res.json()
+      setWeapons(newWeapons)
+    } catch (err) {
+      console.error('Search error:', err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const filteredWeapons = useMemo(() => {
+    return weapons.filter(w =>
+      typeFilter.length === 0 ? true : typeFilter.includes(w.category)
+    )
+  }, [weapons, typeFilter])
 
   return (
     <div className="max-w-6xl mx-auto mt-10 px-4">
       <div className="flex justify-center mb-8">
         <div className="w-full max-w-lg">
           <SearchBar
-            value={searchQuery}
-            onChange={setSearchQuery}
-            onSubmit={setSearchQuery}
+            value={query}
+            onChange={setQuery}
+            onSubmit={handleSearch}
             placeholder="Describe your ideal weapon"
           />
         </div>
@@ -47,10 +60,14 @@ export default function LandingClient({
           />
         </aside>
         <main className="flex-1">
-          <WeaponsList
-            weapons={filtered}
-            onSelectWeapon={id => console.log('Selected', id)}
-          />
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <WeaponsList
+              weapons={filteredWeapons}
+              onSelectWeapon={id => console.log('Selected', id)}
+            />
+          )}
         </main>
       </div>
     </div>
