@@ -44,7 +44,7 @@ export function WeaponBox({ weapon, onSelect }: WeaponBoxProps) {
   return (
     <Card
   onClick={() => onSelect?.(weapon.id)}
-  className="flex flex-col w-full max-w-none cursor-pointer hover:shadow-lg transition-shadow"
+  className="flex flex-col w-full max-w-none cursor-default hover:shadow-lg transition-shadow"
 >
   {/* ─── Top row: image + attack stats ────────────────────────────── */}
   <div className="flex items-start justify-between px-4 pt-4">

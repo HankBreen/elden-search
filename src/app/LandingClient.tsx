@@ -11,25 +11,32 @@ interface LandingClientProps {
 }
 
 export default function LandingClient({ initialWeapons }: LandingClientProps) {
-  const [query, setQuery] = useState<string>('')
   const [typeFilter, setTypeFilter] = useState<string[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [weapons, setWeapons] = useState<Weapon[]>(initialWeapons)
 
   async function handleSearch(q: string) {
     setLoading(true)
-    try {
-      const res = await fetch('/api/search', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: q }),
-      })
-      const { weapons: newWeapons } = await res.json()
-      setWeapons(newWeapons)
-    } catch (err) {
-      console.error('Search error:', err)
-    } finally {
+
+    if (!q.trim()) {
+      console.log("Empty query submit");
+      setWeapons(initialWeapons);
       setLoading(false)
+    } else {
+
+      try {
+        const res = await fetch('/api/search', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: q }),
+        })
+        const { weapons: newWeapons } = await res.json()
+        setWeapons(newWeapons)
+      } catch (err) {
+        console.error('Search error:', err)
+      } finally {
+        setLoading(false)
+      }
     }
   }
 
@@ -40,12 +47,10 @@ export default function LandingClient({ initialWeapons }: LandingClientProps) {
   }, [weapons, typeFilter])
 
   return (
-    <div className="max-w-6xl mx-auto mt-10 px-4">
+    <div className="max-w-6xl mx-auto mt-10 px-4 pb-10">
       <div className="flex justify-center mb-8">
         <div className="w-full max-w-lg">
           <SearchBar
-            value={query}
-            onChange={setQuery}
             onSubmit={handleSearch}
             placeholder="Describe your ideal weapon"
           />
