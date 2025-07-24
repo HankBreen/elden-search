@@ -5,6 +5,7 @@ import Filters from '@/components/ui/blocks/Filters'
 import { SearchBar } from '@/components/ui/blocks/SearchBar'
 import { WeaponsList } from '@/components/ui/blocks/WeaponList'
 import type { Weapon } from '@/components/ui/blocks/WeaponBox'
+import  Title  from '@/components/ui/blocks/Title'
 
 interface LandingClientProps {
   initialWeapons: Weapon[]
@@ -48,6 +49,7 @@ export default function LandingClient({ initialWeapons }: LandingClientProps) {
 
   return (
     <div className="max-w-6xl mx-auto mt-10 px-4 pb-10">
+      <Title />
       <div className="flex justify-center mb-8">
         <div className="w-full max-w-lg">
           <SearchBar

@@ -53,7 +53,7 @@ export default function Filters({
   onTypesChange,
 }: FiltersProps) {
   return (
-    <div className="space-y-6 p-4 bg-white rounded-lg shadow">
+    <div className="space-y-6 p-4 rounded-lg shadow">
       <section>
         <h3 className="mb-2 font-medium">Weapon Type</h3>
         {weaponTypeOptions.map(opt => (

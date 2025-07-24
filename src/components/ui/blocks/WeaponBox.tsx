@@ -74,7 +74,7 @@ export function WeaponBox({ weapon, onSelect }: WeaponBoxProps) {
 
   {weapon.description && (
     <CardContent className="px-4 pb-4">
-      <p className="text-sm text-gray-700 line-clamp-3">
+      <p className="text-sm text-white line-clamp-3">
         {weapon.description}
       </p>
     </CardContent>
