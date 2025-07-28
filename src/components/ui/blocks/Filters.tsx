@@ -3,6 +3,7 @@
 
 import React from 'react'
 import { Checkbox } from '@/components/ui/checkbox'
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 export interface FilterOption {
   id: string
@@ -56,20 +57,24 @@ export default function Filters({
     <div className="space-y-6 p-4 rounded-lg shadow">
       <section>
         <h3 className="mb-2 font-medium">Weapon Type</h3>
-        {weaponTypeOptions.map(opt => (
-          <div key={opt.label} className="flex items-center space-x-2 mb-1">
-            <Checkbox
-              checked={selectedTypes.includes(opt.label)}
-              onCheckedChange={checked => {
-                const next = checked
-                  ? [...selectedTypes, opt.label]
-                  : selectedTypes.filter(label => label !== opt.label)
-                onTypesChange(next)
-              }}
-            />
-            <label className="text-sm">{opt.label}</label>
+        <ScrollArea className="h-95 w-50 pr-4 border rounded-md"> {/* You can tweak height */}
+          <div className="space-y-1 p-2">
+            {weaponTypeOptions.map(opt => (
+              <div key={opt.label} className="flex items-center space-x-2">
+                <Checkbox
+                  checked={selectedTypes.includes(opt.label)}
+                  onCheckedChange={checked => {
+                    const next = checked
+                      ? [...selectedTypes, opt.label]
+                      : selectedTypes.filter(label => label !== opt.label)
+                    onTypesChange(next)
+                  }}
+                />
+                <label className="text-sm">{opt.label}</label>
+              </div>
+            ))}
           </div>
-        ))}
+        </ScrollArea>
       </section>
     </div>
   )
