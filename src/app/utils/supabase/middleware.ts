@@ -1,5 +1,8 @@
 
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
+/* eslint-enable @typescript-eslint/no-unused-vars */
 import { type NextRequest, NextResponse } from "next/server";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -13,6 +16,7 @@ export const createClient = (request: NextRequest) => {
     },
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const supabase = createServerClient(
     supabaseUrl!,
     supabaseKey!,
@@ -22,17 +26,18 @@ export const createClient = (request: NextRequest) => {
           return request.cookies.getAll()
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value))
+          cookiesToSet.forEach(({ name, value, /* , options */ }) => request.cookies.set(name, value))
           supabaseResponse = NextResponse.next({
             request,
           })
-          cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
+          cookiesToSet.forEach(({ name, value, /* , options */}) =>
+            supabaseResponse.cookies.set(name, value, /* , options */)
           )
         },
       },
     },
   );
+
 
   return supabaseResponse
 };

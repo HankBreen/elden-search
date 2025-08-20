@@ -28,6 +28,10 @@ export async function POST(req: NextRequest) {
 
     const { data: weapons, error } = await supabase
       .rpc('match_weapons', { query_embedding: embedding });
+    
+      if (error) {
+        console.error("Error matching weapons", error.message);
+      }
 
     // 3. Return the matched weapons
     return NextResponse.json({ weapons })

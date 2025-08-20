@@ -8,8 +8,12 @@ export default async function Page() {
 
   // Fetch weapons data; data can be null, so coalesce to empty array
   const { data, error } = await supabase
-    .from<'weapons',Weapon>('weapons')
+    .from<'weapons', Weapon>('weapons')
     .select('*')
+  
+  if (error) {
+    console.error("Error Fetching Data", error.message);
+  }
 
   const weapons: Weapon[] = data ?? []
 
