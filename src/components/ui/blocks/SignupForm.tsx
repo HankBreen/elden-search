@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 
-export default function LoginForm() {
+export default function SignupForm() {
   return (
     <Card className="w-full max-w-sm">
       <CardHeader>
@@ -53,10 +53,10 @@ export default function LoginForm() {
       </CardContent>
       <CardFooter className="flex-col gap-2">
         <Button type="submit" className="w-full">
-          Login
+          Signup
         </Button>
         <Button variant="outline" className="w-full">
-          Login with Google
+          Signup with Google
         </Button>
       </CardFooter>
     </Card>
