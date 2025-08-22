@@ -1,4 +1,5 @@
 // search.ts
+// Searches for the best 10 matches in the db based on the search query
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 import OpenAI from 'openai'
